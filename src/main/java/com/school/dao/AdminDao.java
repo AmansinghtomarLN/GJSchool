@@ -25,6 +25,14 @@ public class AdminDao {
 		jdbcTemplate.update(sql, classes,feesAmount);
 		
 	}
+	//=====================================================================================
+	
+	public void updateClassesAndFees(String className, int feesAmount) {
+	    String sql = "update classes set fees=? where classes=?";
+	    jdbcTemplate.update(sql, feesAmount, className); 
+	}
+	
+	//============================================================================================
 	
 	public List<FeesClassesDto> listClasses() {
 		String sql = "select * from classes";
@@ -92,6 +100,7 @@ public class AdminDao {
 		jdbcTemplate.update(sql, feestype);
 		
 	}
+	
 
 	public List<String> listfeestype() {
 		String sql = "select feestype from feestype";
@@ -121,6 +130,17 @@ public class AdminDao {
 		String sql = "delete  from category where category=?";
 		jdbcTemplate.update(sql,category);
 	}
+
+//	public void updateFeestype(String feestype) {
+//		// TODO Auto-generated method stub
+//			String sql = "update classes set feestype=? where classes=?";
+//			jdbcTemplate.update(sql, feestype);
+//			
+//		
+//	}
+
+
+	
 	
 }
 

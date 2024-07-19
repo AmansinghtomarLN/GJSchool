@@ -2,13 +2,11 @@ package com.school.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,7 +18,6 @@ public class AdminController {
 
 	@Autowired
 	public AdminDao adminDao;
-	
 	
 	
 	
@@ -39,7 +36,47 @@ public class AdminController {
 	}
 		return "redirect:/classes";
 	}
+//	=====================================================================================
 	
+	//UPDATE FEES!!!!!!!!!!!!!!!!!!
+
+	@RequestMapping("/updateFeesType")
+	public String updateFeesType(Model model) {
+	    List<FeesClassesDto> classes = adminDao.listClasses();
+	    model.addAttribute("classes", classes);
+	    return "updateClasses";  
+	}
+	
+	@RequestMapping("/updatefeestype")
+	public String update(@RequestParam("className") String className,
+	                     @RequestParam("feesAmount") int feesAmount, Model model) {
+
+	    List<FeesClassesDto> classesList = adminDao.listClasses();
+	    boolean classFound = false;
+
+	    for (FeesClassesDto c : classesList) {
+	        if (c.getClasses().equals(className)) {
+	            classFound = true;
+	            adminDao.updateClassesAndFees(className, feesAmount);
+	            model.addAttribute("msg", "Fees Updated Successfully");
+	            
+	            break; 
+	        }
+	    }
+
+	    if (!classFound) {
+	    	 model.addAttribute("msg2", "Enter Valid Class");
+	    }
+// 
+	    List<FeesClassesDto> classes = adminDao.listClasses();
+	    model.addAttribute("classes", classes);
+//	    return "redirect:/updateFeesType"; 
+//	    return "updateFeesType"; 
+	    return "addClasses"; 
+	    
+	}
+
+//======================================================================================	
 	
 	@RequestMapping("/session")
 	public String session(Model model) {
@@ -123,6 +160,8 @@ public class AdminController {
 		adminDao.deleteCategory(category);
 		return "redirect:/category";
 	}
+	
+	
 	
 	
 }

@@ -13,33 +13,38 @@
 <center> 
 <h2> Add Fees Type</h2>
  
-<form:form action="addfeestype" method="get" modelAttribute="feestype">
+<form:form action="updatefeestype" method="post" modelAttribute="feestype">
 
 			<label>Fees Type : </label> <input type="text" name="feestype" placeholder="Type of Fees" />
 			<Br>
 
-			<input type="submit" value="Add feestype">
+		   	<input type="submit" value="Update feestype">
 			 
 		</form:form>
 		
 		<br> <br>
 		
-		
+       
+		    
 		<table border="">
 			<tr>
-				<td>Fees Type</td>
+				 <td>Fees Type</td>
 				<td></td>
 			</tr>
+			
+           
+		
 			
 			<j:forEach var="feestype" items="${feestype}">
 				<tr>
 				<td>${feestype} </td>
 				<td><a href="deletefeestype?feestype=${feestype}">Delete</a></td>
-				<!-- <td><a href="updatefeestype?feestype=${feestype}">/Update</a></td> -->
+				 <td><a href="updatefeestype?feestype=${feestype}">/Update</a></td>
 				</tr>
 			</j:forEach>
 			
 			</table>
+			
 </center>
 </body>
 </html>
