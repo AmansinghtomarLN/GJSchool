@@ -129,7 +129,6 @@
 				<th scope="col"> Name </th>
 				<th scope="col"> Gender </th>
 				<th scope="col">Father </th>
-				<th scope="col">Mother </th>
 				<th scope="col">Classes</th>
 				<th scope="col">Contact</th>
 				<th scope="col"> DOB </th>
@@ -155,7 +154,6 @@
 					<td>${stu.name}</td>
 					<td>${stu.gender}</td>
 					<td>${stu.fName}</td>
-					<td>${stu.mName}</td>
 					<td>${stu.stuClass}</td>
 					<td>${stu.contact}</td>
 					<td>${stu.dob}</td>
