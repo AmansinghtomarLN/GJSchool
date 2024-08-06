@@ -427,7 +427,8 @@ List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 	public String saveAdmissison(AdmissionDto dto, Model model, @RequestParam("aadharPic") MultipartFile  aadharPic,
 			@RequestParam("studentPic") MultipartFile  studentPic, @RequestParam("samagraPic") MultipartFile  samagraPic,
 			@RequestParam("castPic") MultipartFile  castPic, @RequestParam("tcPic") MultipartFile  tcPic,
-			@RequestParam("migrationPic") MultipartFile  migrationPic) throws IOException {
+//			@RequestParam("migrationPic") MultipartFile  migrationPic) throws IOException {
+			@RequestParam(value ="migrationPic",required=false) MultipartFile  migrationPic) throws IOException {
 	
 		System.out.println(dto.getStuClass()+" "+dto.getAddress());
 		
@@ -441,7 +442,21 @@ List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 		dto.setSamagraPhoto(Base64.getEncoder().encodeToString(samagraPic.getBytes()));
 		dto.setCastPhoto(Base64.getEncoder().encodeToString(castPic.getBytes()));
 		dto.setTcPhoto(Base64.getEncoder().encodeToString(tcPic.getBytes()));
-		dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
+	//	dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
+		
+		// Handle migration certificate
+//	    if (stuClass.equals("XI")) {
+//	        dto.setMigrationPhoto(null); // Explicitly set migration photo as null if class is 11
+//	    } else {
+//	        dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
+//	    }
+		if (dto.getStuClass().equals("XI")) {
+	        dto.setMigrationPhoto(null); // Set migration photo to null if class is XI
+	    } else if (migrationPic != null && !migrationPic.isEmpty()) {
+	        dto.setMigrationPhoto(Base64.getEncoder().encodeToString(migrationPic.getBytes()));
+	    } else {
+	        dto.setMigrationPhoto(null); // Or handle it as needed if migrationPic is empty
+	    }
 		
 	
 		if (dto.getId() == 0) {

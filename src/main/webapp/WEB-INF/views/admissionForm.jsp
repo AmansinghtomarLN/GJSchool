@@ -534,6 +534,22 @@
 //                                alert('Invalid file type or No File Selected');
                                 fileInput.value = '';
                                 valid = false;
+                            }else if(className =="XI"){//here i made change
+                            	 if(fi.files.length > 0) {
+                            		 if (!allowedExtensions.exec(migrationPath)) {
+                            			 document.getElementById("migrationPic").style="background-color: Black; border-color: Black";
+                                         fileInput.value = '';
+                                         valid = false;
+                                     } else {
+                                         // Check file size
+                                         const file = Math.round((fsize / 1024));
+                                         if (fileSize > 2048) { // Size in KB
+                                             alert("Migration Pic is too Big. Please select a file less than 2MB.");
+                                             valid = false;
+                                         
+                            	        }
+                            	
+                            	 }	
                             } else{
                                 const fi =  document.getElementById('migrationPic');
                                 if(fi.files.length > 0) {
@@ -645,23 +661,7 @@
                     }
                 }
             }
-            FilevalidationmigrationPic = () => {
-                const fi = document.getElementById('migrationPic');
-                // Check if any file is selected.
-                if (fi.files.length > 0) {
-                    for (const i = 0; i <= fi.files.length - 1; i++) {
-
-                        const fsize = fi.files.item(i).size;
-                        const file = Math.round((fsize / 1024));
-                        // The size of the file.
-                        if (file >= 4096) {
-                            alert(
-                              "File too Big, please select a file less than 4mb");
-                            document.getElementById("migrationPic").value=null;
-                        }
-                    }
-                }
-            }
+        
             FilevalidationBirthPic = () => {
                 const fi = document.getElementById('BirthPic');
                 // Check if any file is selected.
@@ -679,6 +679,10 @@
                     }
                 }
             }
+            
+         
+ //=================================================================================================           
+            
             FilevalidationfatherAadhar = () => {
                 const fi = document.getElementById('fatherAadhar');
                 // Check if any file is selected.
@@ -960,7 +964,7 @@
 </head>
 <body>
 <jsp:include page="../../verMenu.jsp"></jsp:include>
-<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()"> --return !validateform()
+<form:form action="saveAdmissison" modelAttribute="admissionDto" method="post" enctype="multipart/form-data" onsubmit="return validateform()"> 
     
 			<form:input type="hidden" path="id" />
     
