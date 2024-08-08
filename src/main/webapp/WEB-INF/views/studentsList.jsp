@@ -142,7 +142,7 @@
 				<th scope="col"> Session </th>
 				<th scope="col"> Student Photo </th>
 				<th scope="col">Fees Details</th>
-				<th scope="col">Remainin Fees</th>
+				<th scope="col">Remaining Fees</th>
 				<th scope="col"> Action </th>
 				
 			</tr>
@@ -167,9 +167,12 @@
 					<td>${stu.session} </td>
 					<td><img id="aadharPreview" src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40"></td>
 					<td> <a href="submitFees"> Submit Fees</a></td> 
-					<td><j:forEach var="fees" items="${remFeesList}">
+					 <td><j:forEach var="fees" items="${remFeesList}">
 							<j:if test="${stu.scholarNumber==fees.scholarNumberOrName}">${stu.fees-fees.amount }</j:if>
-						</j:forEach> </td>
+						</j:forEach> </td> 
+						
+						
+                               
 					<td>
 					<a href="updateStudents?userId=${stu.id}"> <i class="fas fa-edit"></i></a>
 					<a href="deleteStudent?scholarNumber=${stu.scholarNumber}" onclick="if (!(confirm('Are you sure you want to Delete'))) return false">

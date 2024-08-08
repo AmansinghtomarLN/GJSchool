@@ -174,16 +174,34 @@ public class StudentsDaoImpl implements StudentsDao {
 	return classes.get(0); 
 	}
 	
-	public List<FeesAmountDto> remainingFees() {
-		String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
+	public List<FeesAmountDto> remainingFees() {	
+	//String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
+		String sql = "SELECT s.scholarNumber, " +
+	              "IFNULL(SUM(f.amount), 0) AS paid_fees, " +
+	              "s.fees AS total_fees, " +
+	              "s.fees - IFNULL(SUM(f.amount), 0) AS remaining_fees " +
+	              "FROM students s " +
+	              "LEFT JOIN feestransaction f ON s.scholarNumber = f.scholarNumber " +
+	              "GROUP BY s.scholarNumber, s.fees " +
+	              "HAVING s.fees > 0";	
 	List<FeesAmountDto> feesDto = 	jdbcTemplate.query(sql, new RemFeesMapper());
 	System.out.println("list returned");
 	return feesDto;
+		
+	
 	}
 	
 	
 	public List<FeesAmountDto> remainingFeesOfStudents() {
-		String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
+		//String sql ="SELECT scholarNumber,SUM(amount) FROM feestransaction GROUP BY scholarNumber";
+		String sql = "SELECT s.scholarNumber, " +
+	              "IFNULL(SUM(f.amount), 0) AS paid_fees, " +
+	              "s.fees AS total_fees, " +
+	              "s.fees - IFNULL(SUM(f.amount), 0) AS remaining_fees " +
+	              "FROM students s " +
+	              "LEFT JOIN feestransaction f ON s.scholarNumber = f.scholarNumber " +
+	              "GROUP BY s.scholarNumber, s.fees " +
+	              "HAVING s.fees > 0";	
 	List<FeesAmountDto> feesDto = 	jdbcTemplate.query(sql, new RemFeesMapper());
 	System.out.println("list returned");
 	return feesDto;

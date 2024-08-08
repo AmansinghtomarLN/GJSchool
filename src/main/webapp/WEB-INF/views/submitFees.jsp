@@ -129,7 +129,7 @@
 				<th scope="col">Session </th>
 				<th scope="col">Student Photo </th>
 				<th scope="col">Fees Details</th>
-				<th scope="col">Remainin Fees</th>
+				<th scope="col">Remaining Fees</th>
 				
 			</tr>
 
