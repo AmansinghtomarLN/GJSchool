@@ -22,21 +22,52 @@ public class AdminDao {
 
 	public void addClassesAndFees(String classes,int feesAmount) {
 		String sql = "insert into classes (classes,fees) values(?,?)";
-		jdbcTemplate.update(sql, classes,feesAmount);
+//		jdbcTemplate.update(sql, classes,feesAmount);
+		try {
+			jdbcTemplate.update(sql, classes,feesAmount);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
 	}
 	
 	public List<FeesClassesDto> listClasses() {
 		String sql = "select * from classes";
-		List<FeesClassesDto> classes = jdbcTemplate.query(sql,new RowMapper<FeesClassesDto>() {
-            public FeesClassesDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-            	FeesClassesDto dto = new FeesClassesDto();
-            	dto.setClasses(rs.getString(1));
-            	dto.setFees(rs.getInt(2));
-            	return dto;
-            }
-        });
-	return classes;
+		List<FeesClassesDto> classes = null;
+		try {
+			 classes = jdbcTemplate.query(sql,new RowMapper<FeesClassesDto>() {
+	            public FeesClassesDto mapRow(ResultSet rs, int rowNum) {
+	            	FeesClassesDto dto = new FeesClassesDto();
+	            	try {
+	            		dto.setClasses(rs.getString(1));
+	    				dto.setFees(rs.getInt(2));
+	    				return dto;
+					} catch (Exception e) {
+						e.printStackTrace();
+						return dto;
+					}
+	            	
+	            }
+	        });
+			return classes;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return classes;
+		}
+
+		
+//		List<FeesClassesDto>classes=jdbcTemplate.query(sql, new RowMapper<FeesClassesDto>() {
+//				@Override
+//				public FeesClassesDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+//					FeesClassesDto dto = new FeesClassesDto();
+//					dto.setClasses(rs.getString(1));
+//					dto.setFees(rs.getInt(2));
+//					return dto;
+//				}
+//		});
+//		return classes;
 }
 	
 	public void addSession(String startSession, String endSession) {

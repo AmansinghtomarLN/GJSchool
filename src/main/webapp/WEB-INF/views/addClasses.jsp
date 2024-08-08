@@ -58,7 +58,7 @@ function validateform()
 <center> 
 <h2> Add Classes here</h2>
  
-<form:form action="addClasses" method="get" modelAttribute="classes" onsubmit="return validateform()">
+<form:form action="addClasses" method="post" modelAttribute="classes" onsubmit="return validateform()">
 
 			<label>Class : </label> <input type="text" name="className" id="className" placeholder="Enter Class in Roman Number" />
 			<Br>
@@ -69,6 +69,8 @@ function validateform()
 			 
 		</form:form>
 		
+		<h2 align="center"><font color = "red"> ${classMsg} </font></h2>
+		<h2 align="center"><font color = "green"> ${classMsg1} </font></h2>
 		<br> <br>
 		
 		
