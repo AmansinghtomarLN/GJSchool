@@ -77,7 +77,7 @@
                 
                 var contact = document.getElementById("contact");
                 var altContact = document.getElementById("altContact");                
-                var scholarNumber = document.getElementById("scholarNumber");
+                var scholarNumber = document.getElementById("scholarNumber");                      
                 var lastSchoolStudied = document.getElementById("lastSchoolStudied");  
                 var accNo = document.getElementById("accNo");
                 var ifsc = document.getElementById("ifsc");
@@ -988,7 +988,7 @@
         
                               <div class="form-outline">
                                 <label class="form-label" for="form3Examplev3">Scholar Number</label>
-	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg"/>
+	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg"  readonly="true"/>
                               </div>
         
                             </div>
