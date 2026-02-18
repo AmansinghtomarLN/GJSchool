@@ -63,7 +63,7 @@
             function validateform()
             {
             	var valid = true;
-            	
+            }
                 var name = document.getElementById("name");
                 var religion = document.getElementById("religion");  
                 var fName = document.getElementById("fName");
@@ -108,14 +108,14 @@
                     }
 				
 				 
-
-
+					
+                 /*
                 if(scholarNumber.value.length<=0 || isNaN(scholarNumber.value) || scholarNumber.value.length>20) {
                 	document.getElementById("scholarNumber").style="background-color: #FBE3E4; border-color: Red";
                 	valid = false;
                 }else{
                 	document.getElementById("scholarNumber").style="background-color: white; border-color: black";
-                }
+                }*/
 
 
                 if(fName.value.length<=0 || fName.value.length>20 || !isValidName(fName.value) ) {
@@ -988,7 +988,7 @@
         
                               <div class="form-outline">
                                 <label class="form-label" for="form3Examplev3">Scholar Number</label>
-	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg"  readonly="true"/>
+	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg" readonly="true"/>
                               </div>
         
                             </div>
