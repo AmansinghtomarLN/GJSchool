@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedRuntimeException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -27,19 +28,22 @@ public class StudentsDaoImpl implements StudentsDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public int getPK() {
+		
 		String sql = "select max(id) from students";
-		return jdbcTemplate.queryForObject(sql,Integer.class)  ;
+		return jdbcTemplate.queryForObject(sql,Integer.class);
+		
+		
 	}
 	
-	public AdmissionDto getByScholarNumber(String scholarNumber) {
-		String sql = "select * from students where scholarNumber=? ";
-		return jdbcTemplate.queryForObject(sql,new StudentsMapper(),scholarNumber);  
-	}
-	
-	public List<String> getListOfScholarNumbers() {
-		String sql = "select scholarNumber from students ";
-		return jdbcTemplate.queryForList(sql,String.class);  
-	}
+//	public AdmissionDto getByScholarNumber(String scholarNumber) {
+//		String sql = "select * from students where scholarNumber=? ";
+//		return jdbcTemplate.queryForObject(sql,new StudentsMapper(),scholarNumber);  
+//	}
+//	
+//	public List<String> getListOfScholarNumbers() {
+//		String sql = "select scholarNumber from students ";
+//		return jdbcTemplate.queryForList(sql,String.class);  
+//	}
 	
 
 
@@ -81,14 +85,18 @@ public class StudentsDaoImpl implements StudentsDao {
 	public void saveStudents(AdmissionDto dto) throws IOException {
 	System.out.println("inside DB method");
 		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		
 
+	
 		Object[] args = { getPK()+1, dto.getName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
 						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
 						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
 						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
-						  dto.getScholarNumber(), dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(),
+						  dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(), dto.getScholarNumber(),
 						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto()};
-				;
+			
+	
+		
 		jdbcTemplate.update(sql, args);
 		System.out.println("inserted");
 	}
@@ -228,7 +236,7 @@ public class StudentsDaoImpl implements StudentsDao {
 				dto.getAltContact(), dto.getDob(),  dto.getAadhar(), dto.getBankName(), dto.getAccNo(), dto.getIfsc(), dto.getAddress(),
 				dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), dto.getBranch(), dto.getStuClass(),
 				dto.getFees(), dto.getGender(),dto.getCategory(), dto.getAdmissionDate(), dto.getLastSchoolStudied(), dto.getBirthPlace(), 
-				dto.getReligion(), dto.getSession(), dto.getSamagraId(),dto.getScholarNumber(),};
+				dto.getReligion(), dto.getSession(), dto.getSamagraId(),};
 		int result= jdbcTemplate.update(sql, args);
 		System.out.println("Record updated");
 	}
@@ -243,6 +251,21 @@ public class StudentsDaoImpl implements StudentsDao {
 	public void updateStudent(StudentsDTO dto) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public NestedRuntimeException getListOfAadhar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkAadharDuplicacy(String aadhar) {
+		
+		
+		String query = "SELECT  COUNT(*) FROM students WHERE aadhar = ?";
+		 Integer s=jdbcTemplate.queryForObject(query, Integer.class,aadhar);
+		return s != null &&  s>0;
+		 		
 	}
 
 	

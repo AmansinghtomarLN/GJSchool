@@ -984,16 +984,17 @@
                               </div>
         
                             </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Scholar Number</label>
-	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg" readonly="true"/>
-                              </div>
-        
-                            </div>
-                          </div>
-      
+							
+							
+							<div class="col-md-6 mb-4 pb-2">
+				         <div class="form-outline">
+							             <label class="form-label" for="form3Examplev3">Scholar Number</label>
+							          <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg" readonly="true"/>
+						     </div>
+							   </div>
+					          </div>
+							
+							
                         <div class="row">
                           <div class="col-md-6 mb-4 pb-2">
       
