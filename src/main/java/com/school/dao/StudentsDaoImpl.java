@@ -35,15 +35,15 @@ public class StudentsDaoImpl implements StudentsDao {
 		
 	}
 	
-//	public AdmissionDto getByScholarNumber(String scholarNumber) {
-//		String sql = "select * from students where scholarNumber=? ";
-//		return jdbcTemplate.queryForObject(sql,new StudentsMapper(),scholarNumber);  
-//	}
-//	
-//	public List<String> getListOfScholarNumbers() {
-//		String sql = "select scholarNumber from students ";
-//		return jdbcTemplate.queryForList(sql,String.class);  
-//	}
+	public AdmissionDto getByScholarNumber(String scholarNumber) {
+		String sql = "select * from students where scholarNumber=? ";
+		return jdbcTemplate.queryForObject(sql,new StudentsMapper(),scholarNumber);  
+	}
+	
+	public List<String> getListOfScholarNumbers() {
+		String sql = "select scholarNumber from students ";
+		return jdbcTemplate.queryForList(sql,String.class);  
+	}
 	
 
 
@@ -84,15 +84,36 @@ public class StudentsDaoImpl implements StudentsDao {
 	
 	public void saveStudents(AdmissionDto dto) throws IOException {
 	System.out.println("inside DB method");
-		String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-		
-
 	
+	boolean duplicate = checkAadharDuplicacy(dto.getAadhar());
+
+	System.out.println("Duplicate result = " + duplicate);
+
+	if(duplicate){
+	    System.out.println("Aadhar already exists in database");
+	    return;
+	}
+    
+			String sql = "insert into students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		         System.out.println("Check Scholor");
+                   int cId=getPK()+1;
+                   String scholarNumber="SCH";
+                
+                   if(cId>=1 && cId>9) {
+                	   scholarNumber+="000"+cId;
+                   }else if(cId>=10 && cId>99){
+                	   scholarNumber+="00"+cId;
+                   }else if(cId>=100 && cId>999){
+                	   scholarNumber+="0"+cId;
+                   }
+                   System.out.println("Your ScholorNumber is:"+scholarNumber);
+                   System.out.println("done scholarNumber");
+
 		Object[] args = { getPK()+1, dto.getName(), dto.getfName(), dto.getfOccupation(), dto.getmName(), dto.getmOccupation(), dto.getContact(), 
 						  dto.getAltContact(), dto.getDob(), dto.getSamagraId(), dto.getAadhar(), dto.getBankName(), dto.getAccNo(), 
 						  dto.getIfsc(), dto.getAddress(), dto.getLastClassAttended(), dto.getCity(), dto.getState(), dto.getZip(), 
-						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),
-						  dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(), dto.getScholarNumber(),
+						  dto.getBranch(), dto.getStuClass(), dto.getFees(), dto.getGender(), dto.getCategory(), dto.getAdmissionDate(),scholarNumber, 
+						  dto.getLastSchoolStudied(), dto.getBirthPlace(), dto.getReligion(), dto.getSession(),  
 						  dto.getAadharPhoto(),dto.getStudentPhoto(),dto.getSamagraPhoto(), dto.getCastPhoto(), dto.getTcPhoto(), dto.getMigrationPhoto()};
 			
 	
@@ -264,25 +285,12 @@ public class StudentsDaoImpl implements StudentsDao {
 		
 		String query = "SELECT  COUNT(*) FROM students WHERE aadhar = ?";
 		 Integer s=jdbcTemplate.queryForObject(query, Integer.class,aadhar);
-		return s != null &&  s>0;
+		 
+		//   System.out.println("Duplicate count = " + s);
+		             return s>0;
 		 		
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

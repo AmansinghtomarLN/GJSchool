@@ -109,13 +109,13 @@
 				
 				 
 					
-                 /*
+                 
                 if(scholarNumber.value.length<=0 || isNaN(scholarNumber.value) || scholarNumber.value.length>20) {
                 	document.getElementById("scholarNumber").style="background-color: #FBE3E4; border-color: Red";
                 	valid = false;
                 }else{
                 	document.getElementById("scholarNumber").style="background-color: white; border-color: black";
-                }*/
+                }
 
 
                 if(fName.value.length<=0 || fName.value.length>20 || !isValidName(fName.value) ) {

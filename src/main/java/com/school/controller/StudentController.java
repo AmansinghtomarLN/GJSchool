@@ -396,6 +396,7 @@ public class StudentController {
 			@RequestParam("migrationPic") MultipartFile migrationPic) throws IOException {
 
 		System.out.println(dto.getStuClass() + " " + dto.getAddress());
+		
 
 		String stuClass = dto.getStuClass();
 		dto.setFees(studentsDao.getStudentFees(stuClass));
@@ -415,7 +416,12 @@ public class StudentController {
 		if (dto.getId() == 0) {
 
 			if (studentsDao.checkAadharDuplicacy(dto.getAadhar())) {
-				return "admissionForm";
+				
+			    System.out.println("This Aadhar Number in exist in our dayabse so please enter other adhar number");
+
+				 
+				 
+				    return "admissionForm";
 			}
 
 			else {

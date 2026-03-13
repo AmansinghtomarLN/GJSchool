@@ -38,7 +38,7 @@ public class StudentsMapper implements RowMapper<AdmissionDto>{
 		student.setGender(rs.getString(23));
 		student.setCategory(rs.getString(24));
 		student.setAdmissionDate(rs.getDate(25));
-	//	student.setScholarNumber(rs.getString(26));
+		student.setScholarNumber(rs.getString(26));
 		student.setLastSchoolStudied(rs.getString(27));
 		student.setBirthPlace(rs.getString(28));
 		student.setReligion(rs.getString(29));
