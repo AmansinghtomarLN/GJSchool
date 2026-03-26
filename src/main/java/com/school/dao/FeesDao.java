@@ -70,6 +70,7 @@ public class FeesDao {
 
 	}
 	
+	
 	public List<Integer> feesSummaryReportAmount(Date startDate, Date endDate) {
 
 		String sql = "SELECT sum(amount) FROM feestransaction WHERE txnDate BETWEEN ? AND ?";
@@ -83,7 +84,14 @@ public class FeesDao {
 
 	}
 	
-	
+	public Integer getTotalDeposited(String scholarNumber) {
+
+	    String sql = "SELECT COALESCE(SUM(amount), 0) FROM feestransaction WHERE scholarNumber=?";
+
+	    Integer total = jdbcTemplate.queryForObject(sql, Integer.class, scholarNumber);
+
+	    return total;
+	}
 	
 	
 	

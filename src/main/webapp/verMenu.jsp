@@ -16,6 +16,32 @@
     <title>Document</title>
 </head>
 
+<style>
+/*Navbar transparent*/
+.navbar {
+  background: transparent ;
+  box-shadow: none;
+}
+
+/*Navbar text*/
+.navbar .nav-link,
+.navbar-brand {
+  color: white !important;
+  font-weight: bold;
+}
+
+/*Hover effect*/
+.navbar .nav-link:hover {
+  color: #00f2fe !important;
+}
+
+/*Optional glass effect*/
+.navbar {
+  background: rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(10px);
+}
+</style>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">

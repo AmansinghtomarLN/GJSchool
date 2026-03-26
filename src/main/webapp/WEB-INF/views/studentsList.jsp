@@ -1,6 +1,7 @@
 <%@ taglib prefix="j" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,14 +165,11 @@
 					<td>${stu.aadhar} </td>
 					<td>${stu.samagraId} </td>
 					<td>${stu.branch} </td>
-					<td>${stu.session} </td>
+					<td>${stu.session}</td>
 					<td><img id="aadharPreview" src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40"></td>
 					<td> <a href="submitFees"> Submit Fees</a></td> 
-					<td><j:forEach var="fees" items="${remFeesList}">
-							<j:if test="${stu.scholarNumber==fees.scholarNumberOrName}">${stu.fees-fees.amount }</j:if>
-						</j:forEach> </td>
-					<td>
-					<a href="updateStudents?userId=${stu.id}"> <i class="fas fa-edit"></i></a>
+					<td>${stu.remainingFees}</td>
+					<td><a href="updateStudents?userId=${stu.id}"> <i class="fas fa-edit"></i></a>
 					<a href="deleteStudent?scholarNumber=${stu.scholarNumber}" onclick="if (!(confirm('Are you sure you want to Delete'))) return false">
 							<i class="fas fa-trash"></i></a></td>
 					

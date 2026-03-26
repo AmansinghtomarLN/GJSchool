@@ -8,6 +8,14 @@
       <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
     <title>Dashboard</title>
+<style>
+	body {
+	  background-image: url('/GJSchool/images/bg.png');
+	  background-size: cover;        
+	  background-repeat: no-repeat; 
+	  background-position: center;   
+	}
+	</style>
 </head>
 
 <body>
@@ -17,9 +25,6 @@
 <br> 
 <marquee><h1> Welcome To Gyan Jyoti School</h1></marquee>
 
-
-
-
-
 </body>
+
 </html>

@@ -46,8 +46,16 @@ public class AdmissionDto {
 	public String mEducation;
 	public String admissionType;
 	
-	
+	private int remainingFees;
 
+	
+	public int getRemainingFees() {
+	    return remainingFees;
+	}
+
+	public void setRemainingFees(int remainingFees) {
+	    this.remainingFees = remainingFees;
+	}
 	
 public String getAdmissionType() {
 		return admissionType;

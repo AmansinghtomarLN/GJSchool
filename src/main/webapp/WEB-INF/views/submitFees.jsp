@@ -134,26 +134,33 @@
 			</tr>
 
 			<j:forEach var="stu" items="${studentsList}">
-				<tr>
-					<td>${stu.id}</td>
-					<td>${stu.scholarNumber}</td>
-					<td>${stu.stuClass} </td>
-					<td>${stu.name}</td>
-					<td>${stu.fName}</td>
-					<td>${stu.contact}</td>
-					<td>${stu.dob}</td>
-					<td>${stu.category}</td>
-					<td>${stu.samagraId} </td>
-					<td>${stu.branch} </td>
-					<td>${stu.session} </td>
-					<td><img id="aadharPreview" src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40"></td>
-					<td> <a href="feesSummary?scholarNumber=${stu.scholarNumber}"> Details/Deposit</a></td> 
-					<td><j:forEach var="fees" items="${remFeesList}">
-							<j:if test="${stu.scholarNumber==fees.scholarNumberOrName }">${stu.fees-fees.amount }</j:if>
-						</j:forEach> 
-					</td>
-					
-				</tr>
+			<tr>
+			    <td>${stu.id}</td>
+			    <td>${stu.scholarNumber}</td>
+			    <td>${stu.stuClass}</td>
+			    <td>${stu.name}</td>
+			    <td>${stu.fName}</td>
+			    <td>${stu.contact}</td>
+			    <td>${stu.dob}</td>
+			    <td>${stu.category}</td>
+			    <td>${stu.samagraId}</td>
+			    <td>${stu.branch}</td>
+			    <td>${stu.session}</td>
+
+			    <td>
+			        <img src="data:image/jpeg;base64,${stu.studentPhoto}" height="40" width="40">
+			    </td>
+
+			    <td>
+			        <a href="feesSummary?scholarNumber=${stu.scholarNumber}">
+			            Details/Deposit
+			        </a>
+			    </td>
+
+			    <!-- 🔥 FINAL FIX -->
+			    <td>${stu.remainingFees}</td>
+
+			</tr>
 			</j:forEach>
 		</table>
 		<br>

@@ -106,29 +106,38 @@ public class StudentController {
 	@RequestMapping("/submitFees")
 	public String submitFees(Model model, FeesAmountDto dto) {
 
-		int totalFees =  studentsDao.totalFees();
-		int totalRemFees = studentsDao.totalRemainingFees();
-		
-		List<FeesAmountDto> remFeesList = studentsDao.remainingFeesOfStudents();
-		
+	    int totalFees = studentsDao.totalFees();
+	    int totalRemFees = studentsDao.totalRemainingFees();
 
-		
-		List<AdmissionDto> studentsList = studentsDao.listStudents();
-		List<String> session = adminDao.listSession();
-		List<FeesClassesDto> classesList = adminDao.listClasses();
-		
-		
-		model.addAttribute("totalFees", totalFees);
-		model.addAttribute("totalRemFees", totalRemFees);
-		model.addAttribute("classes", classesList);		
-		model.addAttribute("studentsList", studentsList);
-		model.addAttribute("session", session);
-		model.addAttribute("feesAmountDto", dto);
-		model.addAttribute("remFeesList", remFeesList);
-		
-		return "submitFees";
+	    List<AdmissionDto> studentsList = studentsDao.listStudents();
+
+	    
+	    for(AdmissionDto stu : studentsList){
+
+	        int total = stu.getFees();
+
+	        Integer deposited = feesDao.getTotalDeposited(stu.getScholarNumber());
+
+	        int remaining = total - deposited;
+
+	        stu.setRemainingFees(remaining);
+	    }
+
+	    List<String> session = adminDao.listSession();
+	    List<FeesClassesDto> classesList = adminDao.listClasses();
+
+	    model.addAttribute("totalFees", totalFees);
+	    model.addAttribute("totalRemFees", totalRemFees);
+	    model.addAttribute("classes", classesList);
+	    model.addAttribute("studentsList", studentsList);
+	    model.addAttribute("session", session);
+	    model.addAttribute("feesAmountDto", dto);
+
+	    //  old logic
+	    // model.addAttribute("remFeesList", remFeesList);
+
+	    return "submitFees";
 	}
-	
 	@RequestMapping("/feesSummary")
 	public String feesSummary(Model model, @RequestParam("scholarNumber") String scholarNumber, HttpServletRequest request) {
 			List<FeesAmountDto> feesDto = feesDao.feesSummary(scholarNumber);
@@ -356,7 +365,19 @@ List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 		
 		List<AdmissionDto> totalStudentsList = studentsDao.listStudents();
         int totalPageCount = (totalStudentsList.size()/totalRecords)+1;
-		List<AdmissionDto> studentsList = studentsDao.getStudentsByPage(pageid,totalRecords);    
+		List<AdmissionDto> studentsList = studentsDao.getStudentsByPage(pageid,totalRecords);  
+		
+		
+		for(AdmissionDto stu : studentsList){
+
+		    int totalFees = stu.getFees(); // student ki total fees
+
+		    Integer deposited = feesDao.getTotalDeposited(stu.getScholarNumber());
+
+		    int remaining = totalFees - deposited;
+
+		    stu.setRemainingFees(remaining);
+		}
 		
 		List<String> scholarList = 	studentsDao.getListOfScholarNumbers();
 		
