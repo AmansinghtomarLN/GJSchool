@@ -12,4 +12,5 @@ public interface StudentsDao{
 	void deleteStudent(String rollNo);
 	void updateStudent(StudentsDTO dto);
 	AdmissionDto getStudent(int id);
+	public boolean checkAadharDuplicacy(String aadhar);
 }

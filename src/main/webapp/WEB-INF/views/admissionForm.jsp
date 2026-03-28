@@ -63,7 +63,7 @@
             function validateform()
             {
             	var valid = true;
-            	
+            }
                 var name = document.getElementById("name");
                 var religion = document.getElementById("religion");  
                 var fName = document.getElementById("fName");
@@ -77,7 +77,7 @@
                 
                 var contact = document.getElementById("contact");
                 var altContact = document.getElementById("altContact");                
-                var scholarNumber = document.getElementById("scholarNumber");
+                var scholarNumber = document.getElementById("scholarNumber");                      
                 var lastSchoolStudied = document.getElementById("lastSchoolStudied");  
                 var accNo = document.getElementById("accNo");
                 var ifsc = document.getElementById("ifsc");
@@ -108,8 +108,8 @@
                     }
 				
 				 
-
-
+					
+                 
                 if(scholarNumber.value.length<=0 || isNaN(scholarNumber.value) || scholarNumber.value.length>20) {
                 	document.getElementById("scholarNumber").style="background-color: #FBE3E4; border-color: Red";
                 	valid = false;
@@ -984,16 +984,17 @@
                               </div>
         
                             </div>
-                            <div class="col-md-6 mb-4 pb-2">
-        
-                              <div class="form-outline">
-                                <label class="form-label" for="form3Examplev3">Scholar Number</label>
-	                            <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg"/>
-                              </div>
-        
-                            </div>
-                          </div>
-      
+							
+							
+							<div class="col-md-6 mb-4 pb-2">
+				         <div class="form-outline">
+							             <label class="form-label" for="form3Examplev3">Scholar Number</label>
+							          <form:input type="text" id="scholarNumber" path="scholarNumber" placeholder="Scholar Number" class="form-control form-control-lg" readonly="true"/>
+						     </div>
+							   </div>
+					          </div>
+							
+							
                         <div class="row">
                           <div class="col-md-6 mb-4 pb-2">
       
